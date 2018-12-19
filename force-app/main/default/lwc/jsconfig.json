@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "paths": {
+            "c/input-table-cell": [
+                "inputTableCell/inputTableCell.js"
+            ],
+            "c/multi-edit-table": [
+                "MultiEditTable/MultiEditTable.js"
+            ]
+        }
+    },
+    "include": [
+        "**/*",
+        "../../../../.sfdx/typings/lwc/**/*.d.ts"
+    ]
+}
