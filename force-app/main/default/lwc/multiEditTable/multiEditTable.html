@@ -1,0 +1,42 @@
+<template>
+    <lightning-card class="slds-card_boundary" icon-name="custom:custom13">
+        <h1 slot="title">Dynamic Table</h1>
+        <div class="slds-card__body slds-card__body_inner">
+            <div class="slds-page-header">
+                <h1 class="slds-page-header__title">Add and Edit Multiple Rows With Dynamic Columns</h1>
+            </div>
+
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-m-bottom_large"> 
+                <thead>
+                    <tr class="slds-text-title_caps">
+                        <template for:each={columns} for:item="column">
+                            <th key={column.apiName}><div class="slds-truncate">{column.label}</div></th>
+                        </template>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={rows} for:item="row" for:index="index">
+                        <tr class="inputRows" key={row.uuid}>
+                            <template for:each={columns} for:item="column">
+                                <td key={column.apiName}>
+                                    <c-input-table-cell record={row} field={column.apiName}></c-input-table-cell>
+                                </td>
+                            </template>
+                            <td>
+                                <lightning-button value={index} variant="brand" label="Delete Row" onclick={removeRow}></lightning-button>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td><lightning-button variant="brand" label="Add Row" onclick={addRow}></lightning-button></td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div slot="footer">
+                <lightning-button variant="brand" label="Submit" onclick={submit}></lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+</template>

@@ -3,11 +3,14 @@
         "experimentalDecorators": true,
         "baseUrl": ".",
         "paths": {
+            "c/demo-composition": [
+                "demoComposition/demoComposition.js"
+            ],
             "c/input-table-cell": [
                 "inputTableCell/inputTableCell.js"
             ],
             "c/multi-edit-table": [
-                "MultiEditTable/MultiEditTable.js"
+                "multiEditTable/multiEditTable.js"
             ]
         }
     },
