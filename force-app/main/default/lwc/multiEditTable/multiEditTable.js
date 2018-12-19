@@ -1,5 +1,4 @@
 import { LightningElement, track, api } from 'lwc';
-import submitRecords from '@salesforce/apex/MultiEditTableController.submitRecords';
 
 export default class MultiEditTable extends LightningElement {
     @api columnList;
@@ -22,7 +21,8 @@ export default class MultiEditTable extends LightningElement {
         return uuid;
     }
 
-    submit() {
+    @api
+    retrieveRecords() {
         var records = [];
         Array.from( this.template.querySelectorAll("tr.inputRows") ).forEach(row => {
             var record = {};
@@ -33,13 +33,7 @@ export default class MultiEditTable extends LightningElement {
             records.push(record);
         })
 
-        submitRecords({ records: records })
-            .then(() => {
-                alert('Success!');
-            })
-            .catch(() => {
-                alert('Something went wrong...');;
-            })
+        return records;
     }
 
     removeRow(event) {

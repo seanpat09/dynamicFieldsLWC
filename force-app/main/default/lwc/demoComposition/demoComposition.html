@@ -1,5 +1,11 @@
 <template>
     <c-multi-edit-table 
-        column-list='\[{ "label" : "Name", "apiName" : "Name" }]'>
+        column-list='\[{ "label" : "Name", "apiName" : "Name"} , { "label" : "Email", "apiName" : "Email" }, { "label" : "Phone", "apiName" : "Phone" }]'>
     </c-multi-edit-table>
+
+    <c-multi-edit-table 
+        column-list='\[{ "label" : "Fee Name", "apiName" : "FeeName" }, { "label" : "Amount", "apiName" : "Amount" }]'>
+    </c-multi-edit-table>
+    <lightning-button variant="brand" label="Submit" onclick={submit}></lightning-button>
+
 </template>
