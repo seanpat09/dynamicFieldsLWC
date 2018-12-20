@@ -1,0 +1,22 @@
+{
+  "name": "dynamicfields",
+  "version": "1.0.0",
+  "description": "## Dev, Build and Test",
+  "dependencies": {},
+  "devDependencies": {
+    "@salesforce/lwc-jest": "^0.4.3"
+  },
+  "scripts": {
+    "test:unit": "lwc-jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seanpat09/dynamicFieldsLWC.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seanpat09/dynamicFieldsLWC/issues"
+  },
+  "homepage": "https://github.com/seanpat09/dynamicFieldsLWC#readme"
+}

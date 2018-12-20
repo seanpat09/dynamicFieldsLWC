@@ -6,3 +6,4 @@ package.xml
 **/jsconfig.json
 
 **/.eslintrc.json
+**/__tests__/**
