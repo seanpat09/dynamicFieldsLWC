@@ -1,10 +1,12 @@
 <template>
     <c-multi-edit-table 
-        column-list='\[{ "label" : "Name", "apiName" : "Name"} , { "label" : "Email", "apiName" : "Email" }, { "label" : "Phone", "apiName" : "Phone" }]'>
+        column-list='\[{ "label" : "Name", "apiName" : "Name"} , { "label" : "Email", "apiName" : "Email" }, { "label" : "Phone", "apiName" : "Phone" }]'
+        title='Attendees'>
     </c-multi-edit-table>
 
     <c-multi-edit-table 
-        column-list='\[{ "label" : "Fee Name", "apiName" : "FeeName" }, { "label" : "Amount", "apiName" : "Amount" }]'>
+        column-list='\[{ "label" : "Fee Name", "apiName" : "FeeName" }, { "label" : "Amount", "apiName" : "Amount" }]'
+        title='Estimated Fees'>
     </c-multi-edit-table>
     <lightning-button variant="brand" label="Submit" onclick={submit}></lightning-button>
 

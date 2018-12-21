@@ -7,7 +7,7 @@
     "@salesforce/lwc-jest": "^0.4.3"
   },
   "scripts": {
-    "test:unit": "lwc-jest --coverage"
+    "test:unit": "lwc-jest"
   },
   "repository": {
     "type": "git",

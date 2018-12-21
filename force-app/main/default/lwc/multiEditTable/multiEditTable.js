@@ -2,12 +2,12 @@ import { LightningElement, track, api } from 'lwc';
 
 export default class MultiEditTable extends LightningElement {
     @api columnList;
+    @api title
     columns;
 
     @track rows = [{ uuid: this.createUUID() }];
 
     connectedCallback() {
-        debugger;
         this.columns = JSON.parse(this.columnList.substring(1));
     }
 
