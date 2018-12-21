@@ -22,6 +22,11 @@ afterEach(() => {
 });
 
 describe('Input table cell', () => {
+    it('should have the correct label and name', () => {
+        expect(lwcInput.label).toBe('Name');
+        expect(lwcInput.name).toBe('Name');
+    });
+    
     it('displays an input field', () => {
         expect(lwcInput.value).toBe('Test Name');
     });
