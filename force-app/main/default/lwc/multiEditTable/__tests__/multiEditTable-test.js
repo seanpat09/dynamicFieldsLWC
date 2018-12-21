@@ -37,6 +37,14 @@ describe('Multi Edit Tables Initialization', () => {
         expect(allColumnNames.has('Amount')).toBe(true)
     });
 
+    it('should parse unescaped columnList string correctly', () => {
+        element.columnList = '[{ "label" : "Fee Name", "apiName" : "FeeName" }]';
+        document.body.appendChild(element);
+        const column = element.shadowRoot.querySelector('th');
+
+        expect(column.textContent).toBe("Fee Name");
+    });
+
     it('should create an initial row with an input in each column', () => {
         document.body.appendChild(element);
 

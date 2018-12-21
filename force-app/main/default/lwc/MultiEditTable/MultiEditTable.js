@@ -8,7 +8,8 @@ export default class MultiEditTable extends LightningElement {
     @track rows = [{ uuid: this.createUUID() }];
 
     connectedCallback() {
-        this.columns = JSON.parse(this.columnList.substring(1));
+        let cleanedColumnList = this.columnList[0] === '\\' ? this.columnList.substring(1) : this.columnList;
+        this.columns = JSON.parse(cleanedColumnList);
     }
 
     createUUID() {
