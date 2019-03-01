@@ -1,0 +1,5 @@
+<aura:component implements="flexipage:availableForAllPageTypes" controller="MultiEditTableController">
+    <c:auraMultiEditTable aura:id="attendees" title="Attendees Aura" columns="[{ 'label' : 'Name', 'apiName' : 'Name'} , { 'label' : 'Email', 'apiName' : 'Email' }, { 'label' : 'Phone', 'apiName' : 'Phone' }]"></c:auraMultiEditTable>
+    <c:auraMultiEditTable aura:id="fees" title="Estimated Fees Aura" columns="[{ 'label' : 'Fee Name', 'apiName' : 'FeeName' }, { 'label' : 'Amount', 'apiName' : 'Amount' }]"></c:auraMultiEditTable>
+    <lightning:button variant="brand" label="Submit" onclick="{!c.submit}"></lightning:button>
+</aura:component>	

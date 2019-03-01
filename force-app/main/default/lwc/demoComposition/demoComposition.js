@@ -3,17 +3,14 @@ import submitRecords from '@salesforce/apex/MultiEditTableController.submitRecor
 
 export default class DemoComposition extends LightningElement {
     submit() {
-        var allRecords = [];
-        Array.from( this.template.querySelectorAll("c-multi-edit-table") ).forEach(table => {
-            var tableRecords = table.retrieveRecords();
-            allRecords.push(tableRecords);
-        })
+        let tables = Array.from( this.template.querySelectorAll("c-multi-edit-table") );
+        let allRecords = tables.map(table => table.retrieveRecords());
         submitRecords({ records: allRecords })
             .then(() => {
                 alert('Success!');
             })
             .catch(() => {
-                alert('Something went wrong...');;
+                alert('Something went wrong...');
             })
     }
 }

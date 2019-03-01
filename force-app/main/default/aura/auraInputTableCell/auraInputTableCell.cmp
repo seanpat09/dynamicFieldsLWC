@@ -1,0 +1,7 @@
+<aura:component>
+    <aura:attribute name="record" type="Object"/>
+    <aura:attribute name="field" type="String"/>
+    <aura:attribute name="value" type="String"/>
+
+    <lightning:input label-hidden="{!v.field}" value="{!v.value}" onchange="{!c.updateObject}"></lightning:input>
+</aura:component>	

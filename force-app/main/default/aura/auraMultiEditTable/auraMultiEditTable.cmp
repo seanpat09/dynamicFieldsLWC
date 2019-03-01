@@ -1,0 +1,37 @@
+<aura:component>
+    <aura:attribute name="columns" type="Map[]" ></aura:attribute>
+    <!--If you have aa default here, (i.e. default="[{}]"), for some reason the first elements shares state with other instances of this component-->
+    <aura:attribute name="rows" type="Map[]"/>
+    <aura:attribute name="title" type="String"/>
+
+    <aura:method name="retrieveData" action="{!c.getRows}" access="PUBLIC"/>
+
+    <lightning:card class="slds-card_boundary" iconName="custom:custom13" title="{!v.title}">
+        <div class="slds-card__body slds-card__body_inner">
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-m-bottom_large"> 
+                <thead>
+                    <tr class="slds-text-title_caps">
+                        <aura:iteration var="column" items="{!v.columns}">
+                            <th>{!column.label}</th>
+                        </aura:iteration>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration var="row" items="{!v.rows}" indexVar="rowIndex">
+                        <tr class="inputRows" data-index="{!rowIndex}">
+                            <aura:iteration var="column" items="{!v.columns}">
+                                <td><c:auraInputTableCell record="{!row}" field="{!column.apiName}"/></td>
+                            </aura:iteration>
+                            <td><lightning:button variant="brand" label="Delete Row" onclick="{!c.deleteRow}"></lightning:button></td>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td><lightning:button variant="brand" label="Add Row" onclick="{!c.addRow}"></lightning:button></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </lightning:card>
+</aura:component>

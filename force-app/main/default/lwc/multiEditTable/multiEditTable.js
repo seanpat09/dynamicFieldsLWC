@@ -17,21 +17,21 @@ export default class MultiEditTable extends LightningElement {
         var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
             var r = (dt + Math.random()*16)%16 | 0;
             dt = Math.floor(dt/16);
-            return (c == 'x' ? r :(r&0x3|0x8)).toString(16);
+            return (c === 'x' ? r :(r&0x3|0x8)).toString(16);
         });
         return uuid;
     }
 
     @api
     retrieveRecords() {
-        var records = [];
-        Array.from( this.template.querySelectorAll("tr.inputRows") ).forEach(row => {
-            var record = {};
-            Array.from( row.querySelectorAll("c-input-table-cell") ).forEach(cell => {
-                var inputVal = cell.inputValue();
+        let rows = Array.from( this.template.querySelectorAll("tr.inputRows") );
+        let records = rows.map(row => {
+            let cells = Array.from( row.querySelectorAll("c-input-table-cell") );
+            return cells.reduce( (record, cell) => {
+                let inputVal = cell.inputValue();
                 record[inputVal.field] = inputVal.value;
-            });
-            records.push(record);
+                return record;
+            }, {})
         })
 
         return records;
