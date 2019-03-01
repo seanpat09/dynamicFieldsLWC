@@ -4,7 +4,7 @@
   "description": "## Dev, Build and Test",
   "dependencies": {},
   "devDependencies": {
-    "@salesforce/lwc-jest": "^0.4.3"
+    "@salesforce/lwc-jest": "^0.4.10"
   },
   "scripts": {
     "test:watch": "lwc-jest --watch",
