@@ -1,0 +1,110 @@
+<apex:page controller="MultiEditTableController" showHeader="true" sidebar="true" lightningStylesheets="true">
+    <table id="attendeeTable"></table>
+    <table id="feeTable"></table>
+    <button id="submit">Submit</button>
+    <script>
+        function MultiEditTable(tableElement, columns) {
+            this.tableEl = tableElement;
+            this.columns = columns;
+
+            let tableHead = document.createElement("thead");
+            tableHead.appendChild(
+                this.columns.reduce((headers, column) => {
+                    let header = document.createElement("td");
+                    header.innerHTML = column.label;
+                    headers.appendChild(header);
+                    return headers;
+                }, document.createElement("tr"))
+            );
+
+            this.tableBody = document.createElement("tbody");
+
+            this.buttonRow = document.createElement("tr");
+            let addRowButton = document.createElement("button");
+            addRowButton.innerHTML = "Add Row";
+
+            this.tableBody.appendChild(this.buttonRow);
+            this.buttonRow.appendChild(addRowButton);
+
+            this.tableEl.appendChild(tableHead);
+            this.tableEl.appendChild(this.tableBody);
+
+            this.addRow = () => {
+                let newRow = this.columns.reduce((row, column) => {
+                    let cell = document.createElement("td");
+                    let cellInput = document.createElement("input")
+                    cellInput.setAttribute('data-column',column.apiName);
+                    cell.appendChild(cellInput);
+                    row.appendChild(cell);
+                    return row;
+                }, document.createElement("tr"));
+
+                newRow.setAttribute("class","inputRow");
+                let deleteRowButton = document.createElement("button");
+                deleteRowButton.innerHTML = "Delete Row";
+                deleteRowButton.addEventListener('click', this.deleteRow);
+
+                newRow.appendChild(deleteRowButton);
+                this.tableBody.insertBefore(newRow,this.buttonRow);
+            }
+
+            this.deleteRow = (event) => {
+                event.target.parentElement.remove();
+            }
+
+            this.getRows = function() {
+                return Array.from(this.tableBody.querySelectorAll(".inputRow")).map((row) =>{
+                    return Array.from(row.querySelectorAll("input")).reduce((record,cell) =>{
+                        record[cell.getAttribute('data-column')] = cell.value;
+                        return record;
+                    },{})
+                })
+            }
+
+            this.addRow();
+            addRowButton.addEventListener('click', this.addRow);
+
+            function buildHeader(columns) {
+                columns.reduce((headers, column) => {
+                    let header = document.createElement("td");
+                    header.innerHTML = column.label;
+                    headers.appendChild(header);
+                    return headers;
+                }, document.createElement("tr"))
+            }
+        }
+    </script>
+    <script>
+        (() => {
+            let attendeeEditTable = new MultiEditTable(
+                document.getElementById('attendeeTable'),
+                [{ 'label' : 'Name', 'apiName' : 'Name'} , { 'label' : 'Email', 'apiName' : 'Email' }, { 'label' : 'Phone', 'apiName' : 'Phone' }]
+            );
+
+            let feeEditTable = new MultiEditTable(
+                document.getElementById('feeTable'),
+                [{ 'label' : 'Fee Name', 'apiName' : 'FeeName' }, { 'label' : 'Amount', 'apiName' : 'Amount' }]
+            );
+
+            document.getElementById('submit').addEventListener('click', function(){
+                let data = this.tables.map(table => {
+                    return table.getRows.call(table);
+                })
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.MultiEditTableController.submitRecordsVF}',
+                    JSON.stringify(data),
+                    function(result, event){
+                        if (event.status) {
+                            alert('Success!');
+                        } else {
+                            alert('Something went wrong...');
+                        }
+                    },
+                    {escape: true}
+                );
+            }.bind({
+                tables : [attendeeEditTable, feeEditTable]
+            }));
+        })();
+    </script>
+</apex:page>
