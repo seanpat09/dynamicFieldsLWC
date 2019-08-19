@@ -1,3 +1,37 @@
 <template>
-    <lightning-input variant="label-hidden" label={field} name={field} value={value} onchange={handleInputChange}></lightning-input>
+    <template if:true={showcombo}>
+        <lightning-combobox 
+        name={ifield}
+        label={ifield}
+        variant="label-hidden" 
+        placeholder="-- Select --"
+        options={combooptions}
+        data-recordid={uuid}
+        value={value}
+        required
+        onchange={handleOptionsChange} ></lightning-combobox>
+    </template>
+
+    <template if:true={showinputbox}>
+        <lightning-input 
+        variant="label-hidden" 
+        label={ifield} 
+        name={ifield} 
+        value={value} 
+        data-recordid={uuid}
+        type={type}
+        required
+        onchange={handleInputChange}></lightning-input>
+    </template>
+
+    <template if:true={showtextarea}>
+        <lightning-textarea 
+        variant="label-hidden" 
+        label={ifield} 
+        name={ifield} 
+        value={value} 
+        recordid={uuid}
+        required
+        onchange={handleInputChange}></lightning-textarea>
+    </template>
 </template>
